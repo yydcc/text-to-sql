@@ -1,0 +1,10 @@
+{
+  "public.orders": {
+    "description": "示例配置：替换成服务器上的实际表名。销售额仅计已支付订单。",
+    "columns": {
+      "created_at": {"description": "订单创建时间", "aliases": ["下单时间", "订单日期"]},
+      "status": {"description": "paid 表示已支付", "aliases": ["支付状态"]},
+      "amount": {"description": "订单成交金额，人民币元", "aliases": ["销售额", "成交额", "收入"]}
+    }
+  }
+}

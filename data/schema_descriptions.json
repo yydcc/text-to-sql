@@ -1,0 +1,437 @@
+{
+  "_about": "保险业务数据字典，涵盖代理人、受益人、理赔、客户、员工、保单及保险产品。字段说明结合所在表的业务对象与实际字段类型编写。保费、保额区间和理赔金额采用各自的统计口径。",
+  "public.agentinfo": {
+    "description": "保险代理人资料，记录个人信息、联系方式、执业证照及佣金规则。",
+    "columns": {
+      "agentid": {
+        "description": "代理人资料表的整数编号。与保单表的文本代理人编号使用不同编号体系，当前没有已验证的跨表映射。"
+      },
+      "name": {
+        "description": "代理人姓名，可用于按姓名或姓氏检索代理人。"
+      },
+      "gender": {
+        "description": "代理人性别，用于描述代理人的基本人口属性。"
+      },
+      "dateofbirth": {
+        "description": "代理人出生日期，以文本存储，可作为年龄计算的日期来源。"
+      },
+      "address": {
+        "description": "代理人联系地址。"
+      },
+      "phonenumber": {
+        "description": "代理人联系电话，以整数存储，作为联系方式使用。"
+      },
+      "emailaddress": {
+        "description": "代理人电子邮箱地址。"
+      },
+      "certificatenumber": {
+        "description": "代理人证书编号，用于识别其执业相关证书。"
+      },
+      "licenseissuedate": {
+        "description": "代理人执业许可证签发日期，以文本存储。"
+      },
+      "licenseexpirationdate": {
+        "description": "代理人执业许可证到期日期，以文本存储。"
+      },
+      "commissionstructure": {
+        "description": "代理人佣金方案，记录佣金安排或计提方式的文本说明。"
+      }
+    }
+  },
+  "public.beneficiaryinfo": {
+    "description": "保险受益人资料，记录受益人的身份标识、人口属性和联系方式。",
+    "columns": {
+      "beneficiaryid": {
+        "description": "受益人编号，用于标识保险受益人，可与理赔记录中的受益人编号对应。"
+      },
+      "name": {
+        "description": "受益人姓名。"
+      },
+      "gender": {
+        "description": "受益人性别。"
+      },
+      "dateofbirth": {
+        "description": "受益人出生日期，以文本存储，可作为年龄计算的日期来源。"
+      },
+      "nationality": {
+        "description": "受益人国籍，记录其国籍所属国家或地区。"
+      },
+      "address": {
+        "description": "受益人联系地址。"
+      },
+      "phonenumber": {
+        "description": "受益人联系电话，以整数存储，作为联系方式使用。"
+      },
+      "emailaddress": {
+        "description": "受益人电子邮箱地址。"
+      }
+    }
+  },
+  "public.claiminfo": {
+    "description": "保险理赔案件记录，关联对应保单及受益人，包含理赔分类、理赔金额、审核与付款信息。",
+    "columns": {
+      "claimnumber": {
+        "description": "理赔编号，用于标识一条理赔记录或理赔案件。"
+      },
+      "policynumber": {
+        "description": "理赔对应的保单编号，可与保单表中的保单编号对应。"
+      },
+      "claimdate": {
+        "description": "理赔日期，以文本存储，记录理赔事项的日期。"
+      },
+      "claimtype": {
+        "description": "理赔类型，按理赔事项分类，例如医疗理赔和意外伤害理赔。",
+        "aliases": [
+          "理赔类型"
+        ]
+      },
+      "claimamount": {
+        "description": "理赔金额，记录理赔案件的数值金额。统计实付金额时应结合理赔状态和付款信息确认口径。",
+        "aliases": [
+          "理赔金额",
+          "赔付金额"
+        ]
+      },
+      "claimstatus": {
+        "description": "理赔状态，记录案件当前的处理或审核结果。"
+      },
+      "claimdescription": {
+        "description": "理赔事由说明，记录案件情况或理赔申请的文字描述。"
+      },
+      "beneficiaryid": {
+        "description": "理赔涉及的受益人编号，以文本存储，可与受益人资料中的编号对应。"
+      },
+      "medicalrecords": {
+        "description": "病历资料，记录理赔相关医疗记录或病历材料信息。"
+      },
+      "accidentreport": {
+        "description": "事故报告，记录理赔涉及的事故情况或相关报告信息。"
+      },
+      "claimhandler": {
+        "description": "理赔经办人，记录办理该理赔案件的人员信息。"
+      },
+      "reviewdate": {
+        "description": "理赔审核日期，以文本存储，反映案件审核时间。"
+      },
+      "paymentmethod": {
+        "description": "理赔付款方式，记录理赔款使用的支付方式。"
+      },
+      "paymentdate": {
+        "description": "理赔付款日期，以文本存储，记录理赔款支付时间。"
+      },
+      "denialreason": {
+        "description": "理赔拒赔原因，记录未获赔付的理由或说明。"
+      }
+    }
+  },
+  "public.customerinfo": {
+    "description": "保险客户资料，涵盖客户基本信息、联系方式、职业和健康信息，以及客户来源、分类和状态。",
+    "columns": {
+      "customerid": {
+        "description": "客户资料表的整数编号。与保单表的文本客户编号使用不同编号体系，当前没有已验证的跨表映射。"
+      },
+      "name": {
+        "description": "客户姓名。"
+      },
+      "gender": {
+        "description": "客户性别。"
+      },
+      "dateofbirth": {
+        "description": "客户出生日期，以文本存储，可作为年龄计算的日期来源。"
+      },
+      "idnumber": {
+        "description": "客户身份证件号码，以文本存储，用于身份识别。"
+      },
+      "address": {
+        "description": "客户联系地址。"
+      },
+      "phonenumber": {
+        "description": "客户联系电话，以整数存储，作为联系方式使用。"
+      },
+      "emailaddress": {
+        "description": "客户电子邮箱地址。"
+      },
+      "maritalstatus": {
+        "description": "客户婚姻状况。"
+      },
+      "occupation": {
+        "description": "客户职业，记录其工作或职业类别。"
+      },
+      "healthstatus": {
+        "description": "客户健康状况，记录客户的健康状态或相关描述。"
+      },
+      "registrationdate": {
+        "description": "客户登记日期，以文本存储，记录客户资料的登记时间。"
+      },
+      "customertype": {
+        "description": "客户类型，记录业务上对客户的分类。"
+      },
+      "sourceofcustomer": {
+        "description": "客户来源，记录客户由哪个渠道或途径获取。"
+      },
+      "customerstatus": {
+        "description": "客户状态，记录该客户在客户管理中的当前状态。"
+      }
+    }
+  },
+  "public.employeeinfo": {
+    "description": "公司员工资料，包含员工基本信息、联系方式、任职部门、岗位、薪资及在职状态。",
+    "columns": {
+      "employeeid": {
+        "description": "员工编号，用于标识公司员工。"
+      },
+      "name": {
+        "description": "员工姓名。"
+      },
+      "gender": {
+        "description": "员工性别。"
+      },
+      "dateofbirth": {
+        "description": "员工出生日期，以文本存储，可作为年龄计算的日期来源。"
+      },
+      "address": {
+        "description": "员工联系地址。"
+      },
+      "phonenumber": {
+        "description": "员工联系电话，以文本存储。"
+      },
+      "emailaddress": {
+        "description": "员工电子邮箱地址。"
+      },
+      "hiredate": {
+        "description": "员工入职日期，以文本存储，可作为计算司龄的日期来源。"
+      },
+      "position": {
+        "description": "员工岗位，记录员工担任的职位。"
+      },
+      "department": {
+        "description": "员工所属部门。"
+      },
+      "salary": {
+        "description": "员工薪资金额，以整数存储。"
+      },
+      "location": {
+        "description": "员工工作地点，记录其办公地点或工作所在地区。"
+      },
+      "supervisor": {
+        "description": "员工直属上级，记录其主管或汇报对象的信息。"
+      },
+      "employeetype": {
+        "description": "员工类别，记录员工的用工或雇佣类型。"
+      },
+      "employeestatus": {
+        "description": "员工状态，记录员工当前的任职状态。"
+      }
+    }
+  },
+  "public.policyinfo": {
+    "description": "保险保单事实表，每条记录对应一份保单。可直接按本表客户编号、代理人编号、保费支付状态及生效日期统计保单。本表不含实缴或应缴保费金额、受益比例、附加险信息或状态变更历史。经当前库只读核查，保单中的 CUST、AGENT、PROD 编号与资料表整数编号没有可用映射，去掉前缀后也没有匹配。统计保单数量时直接使用保单事实表。跨表编号映射补齐前，保单保费不能用产品表价格计算。",
+    "columns": {
+      "policynumber": {
+        "description": "保单编号。当前保单表中的编号无重复，可作为保单计数粒度。",
+        "aliases": [
+          "保单号",
+          "保单数",
+          "保单数量"
+        ]
+      },
+      "customerid": {
+        "description": "保单中的客户或投保人编号，形如 CUST 加数字。按客户或投保人汇总保单时直接用本字段。当前无法映射至客户资料表整数编号。",
+        "aliases": [
+          "保单客户编号",
+          "投保人",
+          "投保人编号"
+        ]
+      },
+      "productid": {
+        "description": "保单中的产品编号，形如 PROD 加数字。当前无法映射至产品表的整数编号，不能据此关联产品标价或产品特征。",
+        "aliases": [
+          "保单产品编号"
+        ]
+      },
+      "policystatus": {
+        "description": "保单当前状态快照，现有值为生效、终止、暂停。保单表不记录状态变更时间或历史状态。",
+        "aliases": [
+          "保单状态",
+          "当前状态"
+        ]
+      },
+      "beneficiary": {
+        "description": "保单记载的受益人信息，以文本存储。"
+      },
+      "relationship": {
+        "description": "受益人关系，描述保单受益人与被保险人的关系。"
+      },
+      "policystartdate": {
+        "description": "保单生效日，以 YYYY-MM-DD HH:MM:SS 文本存储。缺少独立投保日期时，用生效日作为新保单月份的代理口径，可 CAST 为 date 或取前七位作为年月。",
+        "aliases": [
+          "投保日期",
+          "保单生效日期",
+          "新保单月份"
+        ]
+      },
+      "policyenddate": {
+        "description": "保单到期日，以 YYYY-MM-DD HH:MM:SS 文本存储。用与生效日之间的实际日期范围判断保单期限。",
+        "aliases": [
+          "保单到期日期",
+          "保单结束日期"
+        ]
+      },
+      "premiumpaymentstatus": {
+        "description": "保费支付状态，现有值为已支付、未支付、逾期。按保单客户编号和本字段分组可统计不同支付状态的保单数量。",
+        "aliases": [
+          "保费支付状态",
+          "保费缴纳状态",
+          "PremiumPaymentStatus"
+        ]
+      },
+      "paymentdate": {
+        "description": "保费缴纳日期，以文本存储，记录该保单的缴费时间。"
+      },
+      "paymentmethod": {
+        "description": "保费缴纳方式，记录该保单的保费支付方式。"
+      },
+      "agentid": {
+        "description": "保单中的代理人编号，形如 AGENT 加数字。按代理人汇总保单时直接用本字段。当前无法映射至代理人资料表整数编号。",
+        "aliases": [
+          "保单代理人编号",
+          "代理保单"
+        ]
+      }
+    }
+  },
+  "public.productinfo": {
+    "description": "保险产品资料，包含险种、保障范围、保障期限、保费、投保条件及销售状态。险种以产品类型为准，保费金额和文本保额区间分别存储。",
+    "columns": {
+      "productid": {
+        "description": "产品资料表的整数编号。当前存在重复编号及价格冲突，也无法与保单表的文本产品编号匹配。"
+      },
+      "productname": {
+        "description": "保险产品名称，记录具体产品的名称。"
+      },
+      "producttype": {
+        "description": "保险产品类型，也称保险类型或险种，用于对保险产品进行分组，例如寿险、医疗保险和汽车保险。",
+        "aliases": [
+          "保险类型",
+          "保险产品类型",
+          "险种",
+          "每种保险类型"
+        ]
+      },
+      "coveragerange": {
+        "description": "保障范围或保额区间，以文本存储，例如 100万-500万。进行数值统计前需明确取区间上限、下限还是其他口径。",
+        "aliases": [
+          "保障范围",
+          "保额区间",
+          "保险金额区间"
+        ]
+      },
+      "coverageterm": {
+        "description": "产品目录的文本保障期限。判断一份保单是否在一年以内，直接使用保单生效日与到期日。"
+      },
+      "premium": {
+        "description": "产品目录保费金额，以整数存储，可按险种统计。该价格不代表每份保单的实缴保费，且当前无法通过保单产品编号关联。",
+        "aliases": [
+          "保费",
+          "保费金额",
+          "产品保费"
+        ]
+      },
+      "paymentfrequency": {
+        "description": "保费缴纳频率，记录产品保费的缴纳周期。"
+      },
+      "productfeatures": {
+        "description": "产品特征标签，当前包含附加服务、免赔额、保额递增。用于产品特征分析，未记录附加险种及保单是否购买附加险。"
+      },
+      "agelimit": {
+        "description": "投保年龄限制，以整数记录产品投保条件中的年龄限制值。"
+      },
+      "premiumcalculation": {
+        "description": "保费计算规则，以文本描述产品保费的计价依据或计算方式。"
+      },
+      "claimsprocess": {
+        "description": "产品理赔流程，以文本描述该产品发生理赔时的办理步骤或要求。"
+      },
+      "underwritingrequirements": {
+        "description": "承保要求，以文本记录该产品审核投保申请和接受承保的条件。"
+      },
+      "salesregion": {
+        "description": "产品销售地区，记录该产品的销售区域范围。"
+      },
+      "productstatus": {
+        "description": "保险产品状态，记录产品当前的销售或管理状态。"
+      }
+    }
+  },
+  "_concepts": {
+    "保险类型": {
+      "columns": [
+        "public.productinfo.producttype"
+      ],
+      "description": "保险/险种分类来自保险产品类型，不能用理赔类型 claiminfo.claimtype 或客户类型 customerinfo.customertype。"
+    },
+    "保险金额": {
+      "columns": [
+        "public.productinfo.premium"
+      ],
+      "description": "本库查询中的“保险金额”默认指产品保费，可直接按数值聚合。",
+      "default_assumption": "保险金额按产品保费 premium 统计。",
+      "unless_terms": [
+        "保额",
+        "保障范围",
+        "保险金额区间",
+        "区间上限",
+        "区间下限",
+        "区间中值",
+        "coveragerange"
+      ]
+    },
+    "保单": {
+      "columns": [],
+      "description": "以 public.policyinfo 为保单统计粒度。客户、投保人和代理人分组使用保单表已有编号。当前缺少通往客户、代理人和产品资料表的已验证关联键。保单表没有保费金额，不能关联产品目录或用零填补缺失金额。请求总保费、平均保费或保费排名时，返回保单数等可核实部分，把无法计算的金额或排名及原因放入 limitations。"
+    },
+    "投保人": {
+      "columns": [
+        "public.policyinfo.customerid"
+      ],
+      "description": "以保单表中的客户编号标识投保人。按投保人请求保费均值或排名时，由于保单保费缺失，可以按这个编号返回各投保人的保单数和即期数据覆盖情况，平均保费为未知，不对未知金额排名。"
+    },
+    "新保单": {
+      "columns": [
+        "public.policyinfo.policystartdate"
+      ],
+      "description": "以保单生效月作为投保月份的默认代理口径，按 YYYY-MM 分组，提供完整月份序列中观察到的月度数量，并用窗口函数标记数量并列最高的月份。"
+    },
+    "保费支付状态": {
+      "columns": [
+        "public.policyinfo.premiumpaymentstatus"
+      ],
+      "description": "查询对象为保单记录中的客户，按客户编号和支付状态分组统计分项保单数，并返回每位客户的总保单数。支付状态为已支付、未支付或逾期。按客户编号即可完整回答数量和状态分布，且不涉及姓名或保费金额。"
+    },
+    "保险期限": {
+      "columns": [
+        "public.policyinfo.policystartdate",
+        "public.policyinfo.policyenddate"
+      ],
+      "description": "用保单自身的到期日与生效日确定期限。一年以内按正常正期限且到期日不晚于生效日加一个日历年（含恰好一年）统计。保费无法计算时也返回符合条件的保单数。"
+    },
+    "受益比例": {
+      "columns": [
+        "public.beneficiaryinfo.beneficiaryid"
+      ],
+      "description": "受益人资料和保单均无受益比例，也无可靠的保单受益人金额分配数据。按 beneficiaryid 分组，每个非空编号一行，只输出编号、档案行数及未知比例。同编号可能有多个姓名，不能任意选一个姓名。平均比例保留 NULL，无法判断最高和最低比例，不能用理赔金额占比替代。"
+    },
+    "附加险种": {
+      "columns": [
+        "public.policyinfo.policynumber"
+      ],
+      "description": "保单表未记录附加险种及附加险保费。产品特征中的附加服务不代表附加险购买。返回全部保单数作为数据覆盖统计，把按附加险分组、保费及市场份额列为不可计算项，不将全部保单数标为附加险数量。"
+    },
+    "保单状态": {
+      "columns": [
+        "public.policyinfo.policystatus"
+      ],
+      "description": "库中仅有保单当前状态，无状态变更记录或状态时间。状态趋势可输出按保单生效年月分组的当前状态分布作为近似视图，注明不是状态迁移历史。现有状态为生效、终止、暂停。"
+    }
+  }
+}

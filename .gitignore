@@ -1,0 +1,11 @@
+.venv/
+.env
+.env.*
+!.env.example
+.idea/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.sqlite*
+reports/
+test/assets/

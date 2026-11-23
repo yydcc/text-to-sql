@@ -1,0 +1,28 @@
+[project]
+name = "text-to-sql-agent"
+version = "0.1.0"
+description = "Read-only LangChain Text-to-SQL agent with schema linking and bounded repair"
+requires-python = ">=3.11"
+dependencies = ["langchain-core>=1.0,<2", "langchain-openai>=1.0,<2", "pydantic>=2,<3", "python-dotenv>=1,<2", "sqlglot>=28,<31", "typer>=0.16,<1", "psycopg[binary]>=3.2,<4", "rich>=13,<16"]
+
+[dependency-groups]
+bird-test = [
+    "pgserver==0.1.4",
+]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1"]
+
+[project.scripts]
+text-to-sql = "text_to_sql.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/text_to_sql"]
